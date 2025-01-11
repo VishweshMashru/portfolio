@@ -1,7 +1,6 @@
 'use client';
 
-import { motion, useMotionValue, useTransform, useScroll } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { motion, useTransform, useScroll } from 'framer-motion';
 
 export default function HomePage() {
   const { scrollY } = useScroll();
