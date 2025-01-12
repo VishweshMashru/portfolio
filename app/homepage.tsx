@@ -91,7 +91,7 @@ export default function HomePage() {
           transition={{ duration: 1, ease: 'easeInOut', delay: 0.3 }}
         >
           <img
-            src="/image.png" // Replace with the correct path to your image
+            src="/Image.png" // Replace with the correct path to your image
             alt="Vishwesh"
             className="object-cover w-full h-full"
           />
