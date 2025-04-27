@@ -127,7 +127,7 @@ export default function HomePage() {
   >
     <h2 className="text-3xl md:text-4xl font-bold text-blue-400">About Me</h2>
     <p className="mt-6 text-lg max-w-4xl mx-auto text-gray-400">
-      I’m currently a junior at San Jose State University, majoring in Computer Science.
+      I am currently a junior at San Jose State University, majoring in Computer Science.
       My projects range from building AI-driven applications to working on image processing and computer vision.
       I love collaborating with others, learning new things, and contributing to meaningful projects.
     </p>

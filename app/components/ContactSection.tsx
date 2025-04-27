@@ -23,7 +23,7 @@ export default function ContactSection() {
         transition={{ duration: 1 }}
       >
         Interested in collaborating, working together, or just want to say hello? 
-        Feel free to reach out — I'd love to connect!
+        Feel free to reach out — I&apos;d love to connect!
       </motion.p>
 
       <motion.a

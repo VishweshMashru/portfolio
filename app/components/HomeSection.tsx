@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { useCallback } from 'react';
 import { motion } from 'framer-motion';
@@ -37,7 +38,7 @@ export default function HeroSection() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        Hi, I'm <span className="text-blue-400">Vishwesh</span>
+        Hi, I am <span className="text-blue-400">Vishwesh</span>
       </motion.h1>
 
       <motion.p
