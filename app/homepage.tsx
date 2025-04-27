@@ -45,92 +45,93 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="relative bg-orange-200 text-white min-h-screen overflow-hidden">
-      {/* Animated Snake Background */}
-      <div
-        className="absolute inset-0 grid pointer-events-none"
-        style={{
-          gridTemplateRows: `repeat(${gridRows}, 1fr)`,
-          gridTemplateColumns: `repeat(${gridCols}, 1fr)`,
-        }}
-      >
-        {Array.from({ length: gridRows * gridCols }).map((_, index) => {
-          const row = Math.floor(index / gridCols);
-          const col = index % gridCols;
-          const isSnake = snake.some((segment) => segment.row === row && segment.col === col);
+    <div className="relative bg-[#1F1F1F] text-gray-200 min-h-screen overflow-hidden">
+  {/* Snake */}
+  <div
+    className="absolute inset-0 grid pointer-events-none"
+    style={{
+      gridTemplateRows: `repeat(${gridRows}, 1fr)`,
+      gridTemplateColumns: `repeat(${gridCols}, 1fr)`,
+    }}
+  >
+    {Array.from({ length: gridRows * gridCols }).map((_, index) => {
+      const row = Math.floor(index / gridCols);
+      const col = index % gridCols;
+      const isSnake = snake.some((segment) => segment.row === row && segment.col === col);
 
-          return (
-            <motion.div
-              key={`${row}-${col}`}
-              className="w-full h-full rounded-lg"
-              style={{
-                backgroundColor: isSnake ? 'rgba(220, 20, 60, 0.5)' : 'transparent', // Dark gray for snake
-              }}
-              initial={false}
-              animate={{
-                backgroundColor: isSnake ? 'rgba(220, 20, 60, 0.5)' : 'transparent',
-              }}
-              transition={{ duration: 0.3 }}
-            />
-          );
-        })}
-      </div>
-
-      {/* Content Section */}
-      <motion.div
-        className="relative flex flex-col md:flex-row items-center justify-center h-[80vh] text-center md:text-left space-y-6 md:space-y-0 md:space-x-8 px-4 z-10"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: 'easeInOut' }}
-      >
-        {/* Image Section */}
+      return (
         <motion.div
-          className="w-64 h-64 md:w-80 md:h-80 rounded-lg overflow-hidden shadow-lg"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, ease: 'easeInOut', delay: 0.3 }}
-        >
-          <img
-            src="/Image.png" // Replace with the correct path to your image
-            alt="Vishwesh"
-            className="object-cover w-full h-full"
-          />
-        </motion.div>
+          key={`${row}-${col}`}
+          className="w-full h-full rounded-sm"
+          style={{
+            backgroundColor: isSnake ? 'rgba(96,165,250,0.4)' : 'transparent', // soft blue
+          }}
+          initial={false}
+          animate={{
+            backgroundColor: isSnake ? 'rgba(96,165,250,0.4)' : 'transparent',
+          }}
+          transition={{ duration: 0.3 }}
+        />
+      );
+    })}
+  </div>
 
-        {/* Text Section */}
-        <div className="max-w-lg">
-          <h1 className="text-4xl md:text-6xl font-bold">
-            Hi, I’m <span className="text-red-400">Vishwesh</span>
-          </h1>
-          <p className="mt-4 text-lg md:text-xl">
-            A passionate software engineer and curious problem solver. I enjoy building innovative projects and exploring the latest technologies.
-          </p>
-          <motion.a
-            href="#about"
-            className="mt-8 px-6 py-3 bg-red-400 text-white rounded-full text-lg font-semibold shadow-lg hover:bg-fuchsia-400 inline-block"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            Learn More About Me
-          </motion.a>
-        </div>
-      </motion.div>
+  {/* Content */}
+  <motion.div
+    className="relative flex flex-col md:flex-row items-center justify-center h-[80vh] text-center md:text-left space-y-6 md:space-y-0 md:space-x-8 px-4 z-10"
+    initial={{ opacity: 0, y: -50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1, ease: 'easeInOut' }}
+  >
+    {/* Image */}
+    <motion.div
+      className="w-64 h-64 md:w-80 md:h-80 rounded-xl overflow-hidden shadow-xl border-2 border-gray-600"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, ease: 'easeInOut', delay: 0.3 }}
+    >
+      <img
+        src="/Image.png"
+        alt="Vishwesh"
+        className="object-cover w-full h-full"
+      />
+    </motion.div>
 
-      {/* About Section */}
-      <motion.div
-        id="about"
-        className="py-16 px-8 bg-orange-300 text-center z-10"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1, ease: 'easeInOut' }}
+    {/* Text */}
+    <div className="max-w-lg">
+      <h1 className="text-4xl md:text-6xl font-bold text-gray-100">
+        Hi, I’m <span className="text-blue-400">Vishwesh</span>
+      </h1>
+      <p className="mt-4 text-lg md:text-xl text-gray-400">
+        A passionate software engineer and curious problem solver. I enjoy building innovative projects and exploring the latest technologies.
+      </p>
+      <motion.a
+        href="#about"
+        className="mt-8 inline-block px-8 py-4 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-full text-lg font-semibold shadow-md hover:from-gray-600 hover:to-gray-800"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-red-400">About Me</h2>
-        <p className="mt-6 text-lg max-w-4xl mx-auto">
-          I’m currently a junior at San Jose State University, majoring in Computer Science. My projects range from building AI-driven applications to working on image processing and computer vision. 
-          I love collaborating with others, learning new things, and contributing to meaningful projects.
-        </p>
-      </motion.div>
+        Learn More About Me
+      </motion.a>
     </div>
+  </motion.div>
+
+  {/* About Section */}
+  <motion.div
+    id="about"
+    className="py-20 px-8 bg-[#2C2C2C] text-center z-10 shadow-inner"
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 1, ease: 'easeInOut' }}
+  >
+    <h2 className="text-3xl md:text-4xl font-bold text-blue-400">About Me</h2>
+    <p className="mt-6 text-lg max-w-4xl mx-auto text-gray-400">
+      I’m currently a junior at San Jose State University, majoring in Computer Science.
+      My projects range from building AI-driven applications to working on image processing and computer vision.
+      I love collaborating with others, learning new things, and contributing to meaningful projects.
+    </p>
+  </motion.div>
+</div>
   );
 }
