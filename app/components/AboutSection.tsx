@@ -25,7 +25,7 @@ export default function AboutSection() {
           iconStyle={{ background: '#3B82F6', color: '#fff' }}
           icon={<FaGraduationCap />}
         >
-          <h3 className="vertical-timeline-element-title font-bold">India</h3>
+          <h3 className="vertical-timeline-element-title font-bold"></h3>
           <p>HighSchool</p>
         </VerticalTimelineElement>
 
