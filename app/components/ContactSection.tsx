@@ -17,7 +17,7 @@ export default function ContactSection() {
       toast.success('Message sent ✅', { id });
       setFormData({ name: '', email: '', message: '' });
     } catch (err) {
-      toast.error('Something went wrong. Try again.', { id });
+      toast.error('Something went wrong. Try again.', { err });
     }
   };
 
