@@ -16,8 +16,12 @@ export default function ContactSection() {
       if (!res.ok) throw new Error('Failed to send');
       toast.success('Message sent ✅', { id });
       setFormData({ name: '', email: '', message: '' });
-    } catch (err) {
-      toast.error('Something went wrong. Try again.', { err });
+    } catch (error) {
+      console.error(error);
+      toast.error(
+        error instanceof Error ? error.message : "Something went wrong. Please try again.",
+        { id }
+      );
     }
   };
 
