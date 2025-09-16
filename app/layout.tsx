@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Vishwesh | Portfolio",
   description: "Portfolio of Vishwesh, showcasing projects in AI, Computer Vision, and Next.js",
+  icons:{
+    icon: "favicon.ico",
+  }
 };
 
 export default function RootLayout({
