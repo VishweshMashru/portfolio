@@ -1,24 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "Vishwesh | Portfolio",
-  description: "Portfolio of Vishwesh, showcasing projects in AI, Computer Vision, and Next.js",
-  icons:{
+  title: "Vishwesh Mashruwala - Software Engineer",
+  description: "Software Engineer specializing in AI, Computer Vision, Systems Programming, and Full-Stack Development",
+  icons: {
     icon: "favicon.ico",
-  }
+  },
+  openGraph: {
+    title: "Vishwesh Mashruwala - Software Engineer",
+    description: "Software Engineer specializing in AI, Computer Vision, and Systems Programming",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -28,28 +22,36 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#1F1F1F] text-gray-200`}
-      >
-        {/* Global Toaster for success/error messages */}
+      <body className="antialiased">
         <Toaster
           position="bottom-center"
           toastOptions={{
             style: {
-              background: "#2C2C2C",
+              background: "#000000",
               color: "#ffffff",
-              border: "1px solid #3A3A3A",
+              border: "none",
+              borderRadius: "9999px",
+              padding: "16px 24px",
+              fontSize: "14px",
             },
             success: {
+              duration: 3000,
               iconTheme: {
-                primary: "#22c55e",
-                secondary: "#1F1F1F",
+                primary: "#ffffff",
+                secondary: "#000000",
               },
             },
             error: {
+              duration: 4000,
               iconTheme: {
-                primary: "#ef4444",
-                secondary: "#1F1F1F",
+                primary: "#ffffff",
+                secondary: "#000000",
+              },
+            },
+            loading: {
+              iconTheme: {
+                primary: "#ffffff",
+                secondary: "#000000",
               },
             },
           }}

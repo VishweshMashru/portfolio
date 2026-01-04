@@ -1,171 +1,274 @@
 "use client";
-import Image from "next/image";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 type Project = {
   title: string;
   description: string;
   tech: string[];
-  href?: string;
-  image?: { url: string; alt?: string }; // add later
-  accent?: string;
+  year: string;
+  category: string;
+  videoUrl?: string;
+  demoUrl?: string;
+  githubUrl?: string;
 };
 
 const projects: Project[] = [
   {
-    title: "EcoFootprint",
-    description:
-      "Next.js platform to track and reduce personal CO₂ emissions with real-time analytics and personalized tips.",
-    tech: ["Next.js", "Tailwind", "Node.js"],
-    href: "#contact",
-    image: undefined,
-    accent: "#22d3ee",
+    title: "Star Gazing Simulator",
+    description: "Interactive 3D celestial simulation featuring real-time star positions, constellation mapping, and astronomical event visualization with accurate physics modeling.",
+    tech: ["Three.js", "WebGL", "Astronomy APIs", "React"],
+    year: "2024",
+    category: "3D Graphics",
+    videoUrl: "", // Add your video URL here
+    demoUrl: "https://cs-116-a-final-project.vercel.app/", // Add demo link if available
+    githubUrl: "", // Add GitHub link if available
+  },
+  {
+    title: "3D Lander Simulator",
+    description: "Physics-based spacecraft landing simulator with realistic gravity, thrust mechanics, and terrain collision detection for Mars-style landing scenarios.",
+    tech: ["Unity", "C#", "Physics Engine", "3D Modeling"],
+    year: "2024",
+    category: "Game Development",
+    videoUrl: "", // Add your video URL here
+    demoUrl: "",
+    githubUrl: "",
+  },
+  {
+    title: "Medical Visualization System",
+    description: "Unity-based 3D medical visualization platform for anatomical education using DICOM data processing and Marching Cubes algorithms for organ reconstruction.",
+    tech: ["Unity", "C#", "DICOM", "Marching Cubes"],
+    year: "2024",
+    category: "Computer Vision",
+    videoUrl: "",
+    demoUrl: "",
+    githubUrl: "",
   },
   {
     title: "Unix Shell",
-    description:
-      "POSIX-style shell in C with job control, pipes, redirection, signals, and built-ins.",
-    tech: ["C", "Unix APIs", "Signals & Processes"],
-    href: "#contact",
-    image: undefined,
-    accent: "#60a5fa",
+    description: "POSIX-compliant shell implementation in C featuring job control, pipes, I/O redirection, signal handling, and custom built-in commands.",
+    tech: ["C", "Unix APIs", "Systems Programming"],
+    year: "2024",
+    category: "Systems",
+    videoUrl: "",
+    githubUrl: "",
   },
   {
-    title: "Toy Language Compiler & VM",
-    description:
-      "Compiler for a C-like language (Java + ANTLR) targeting a custom bytecode VM with a stack-based evaluator.",
-    tech: ["Java", "ANTLR", "Custom VM"],
-    href: "#contact",
-    image: undefined,
-    accent: "#a78bfa",
+    title: "Compiler & VM",
+    description: "Complete compiler toolchain for a C-like language with lexer, parser, semantic analyzer, and custom stack-based virtual machine for bytecode execution.",
+    tech: ["Java", "ANTLR", "Bytecode", "VM Design"],
+    year: "2023",
+    category: "Compilers",
+    videoUrl: "",
+    githubUrl: "",
+  },
+  {
+    title: "Gene Finding HMM",
+    description: "Hidden Markov Model implementation for prokaryotic gene prediction with ribosome binding site detection and comprehensive educational documentation.",
+    tech: ["Python", "Bioinformatics", "Machine Learning"],
+    year: "2024",
+    category: "Computational Biology",
+    githubUrl: "",
   },
 ];
 
-function ProjectCard({ p, i }: { p: Project; i: number }) {
-  const accent = p.accent ?? "#22d3ee";
+export default function ProjectsSection() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [playingVideo, setPlayingVideo] = useState<number | null>(null);
+
   return (
-    <motion.a
-      href={p.href ?? "#"}
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ delay: i * 0.06, duration: 0.5, ease: "easeOut" }}
-      className="group relative overflow-hidden rounded-3xl border border-white/10 bg-[#0e1013] shadow-[0_10px_30px_rgba(0,0,0,0.45)]"
-    >
-      <div className="relative aspect-[16/10]">
-        {p.image?.url ? (
-          <Image
-            src={p.image.url}
-            alt={p.image.alt ?? p.title}
-            fill
-            priority={i < 2}
-            sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
-            className="object-cover"
-          />
-        ) : (
-          <div
-            className="h-full w-full"
-            style={{
-              background:
-                `radial-gradient(120% 80% at 80% 10%, ${accent}22 0%, transparent 60%),` +
-                `radial-gradient(120% 80% at 20% 90%, #ffffff10 0%, transparent 60%),` +
-                `linear-gradient(180deg, #0f1217 0%, #0a0c10 100%)`,
-            }}
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
+    <section id="projects" className="relative py-32 px-6 bg-black overflow-hidden">
+      {/* Grid pattern */}
+      <div className="absolute inset-0 opacity-[0.02]">
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-overlay"
+          className="absolute inset-0"
           style={{
-            backgroundImage:
-              "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"300\" height=\"300\" viewBox=\"0 0 300 300\"><filter id=\"n\"><feTurbulence type=\"fractalNoise\" baseFrequency=\"0.85\" numOctaves=\"3\"/></filter><rect width=\"300\" height=\"300\" filter=\"url(%23n)\"/></svg>')",
-            backgroundSize: "300px 300px",
+            backgroundImage: `
+              linear-gradient(to right, #fff 1px, transparent 1px),
+              linear-gradient(to bottom, #fff 1px, transparent 1px)
+            `,
+            backgroundSize: "100px 100px",
           }}
         />
       </div>
 
-      <div className="relative p-6">
-        <h3 className="text-2xl font-semibold text-white tracking-tight">
-          {p.title}
-        </h3>
-        <p className="mt-2 text-[15px] leading-6 text-zinc-300">
-          {p.description}
-        </p>
-
-        <div className="mt-4 flex flex-wrap gap-2">
-          {p.tech.map((t) => (
-            <span
-              key={t}
-              className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-zinc-100"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-
-        <div
-          className="mt-5 inline-flex items-center text-sm font-medium"
-          style={{ color: accent }}
-        >
-          View details
-          <svg
-            className="ml-1 h-4 w-4 translate-x-0 transition-transform group-hover:translate-x-0.5"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-          >
-            <path d="M13.2 5.2a1 1 0 0 1 1.6-1.2l6 6a1 1 0 0 1 0 1.4l-6 6a1 1 0 1 1-1.4-1.4l4.3-4.3H4a1 1 0 1 1 0-2h14.3l-4.3-4.3a1 1 0 0 1 .2-1.2z" />
-          </svg>
-        </div>
-      </div>
-
-      <div
-        className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
-        style={{
-          background: `radial-gradient(180% 100% at 50% 0%, ${accent}22 0%, transparent 60%)`,
-        }}
-      />
-    </motion.a>
-  );
-}
-
-export default function ProjectsSection() {
-  return (
-    <section id="projects" className="relative overflow-hidden py-24 px-6">
-      {/* background depth */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0b0d10] to-[#0a0a0c]" />
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.12]"
-        style={{
-          backgroundImage:
-            "radial-gradient(80% 50% at 50% -10%, rgba(59,130,246,0.25) 0%, transparent 60%), radial-gradient(70% 45% at 10% 110%, rgba(45,212,191,0.18) 0%, transparent 60%)",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-6xl">
-        {/* TITLE: fade/slide like Skills + underline grow */}
+      <div className="relative max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center"
+          className="mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="text-4xl font-bold tracking-tight text-white">Projects</h2>
-
-          <motion.div
-            initial={{ scaleX: 0, opacity: 0 }}
-            whileInView={{ scaleX: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
-            className="mx-auto mt-3 h-[2px] w-24 origin-left rounded bg-gradient-to-r from-blue-500 to-cyan-400"
-          />
+          <h2 className="text-6xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+            Projects
+          </h2>
+          <div className="w-20 h-1 bg-white mb-6" />
+          <p className="text-gray-400 text-lg max-w-2xl">
+            A selection of projects spanning web development, systems programming,
+            computer vision, and computational biology.
+          </p>
         </motion.div>
 
-        <div className="mt-10 grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((p, i) => (
-            <ProjectCard key={p.title} p={p} i={i} />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project, i) => (
+            <motion.div
+              key={project.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{
+                duration: 0.6,
+                delay: i * 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              onMouseEnter={() => setHoveredIndex(i)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className="group relative"
+            >
+              <div className="relative h-full border border-gray-800 rounded-2xl overflow-hidden hover:border-gray-600 transition-all duration-500 bg-black hover:bg-gray-950">
+                {/* Video Preview Section */}
+                {project.videoUrl && (
+                  <div className="relative aspect-video bg-gray-900 overflow-hidden">
+                    {playingVideo === i ? (
+                      <video
+                        src={project.videoUrl}
+                        controls
+                        autoPlay
+                        className="w-full h-full object-cover"
+                        onEnded={() => setPlayingVideo(null)}
+                      />
+                    ) : (
+                      <div
+                        className="relative w-full h-full cursor-pointer group/video"
+                        onClick={() => setPlayingVideo(i)}
+                      >
+                        {/* Video thumbnail - you can replace with actual thumbnail */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900" />
+                        
+                        {/* Play button overlay */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center group-hover/video:bg-white/20 transition-all group-hover/video:scale-110">
+                            <svg
+                              className="w-8 h-8 text-white ml-1"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
+                          </div>
+                        </div>
+
+                        {/* Video indicator badge */}
+                        <div className="absolute top-3 right-3 px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs text-white">
+                          Video Demo
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Project Info */}
+                <div className="p-6">
+                  {/* Year badge */}
+                  <div className="flex justify-between items-start mb-3">
+                    <span className="text-xs uppercase tracking-wider text-gray-500">
+                      {project.category}
+                    </span>
+                    <span className="text-xs text-gray-600 font-mono">
+                      {project.year}
+                    </span>
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-white mb-3 tracking-tight group-hover:text-gray-300 transition-colors">
+                    {project.title}
+                  </h3>
+
+                  <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                    {project.description}
+                  </p>
+
+                  {/* Tech stack */}
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.tech.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 text-xs border border-gray-800 text-gray-400 rounded-full group-hover:border-gray-700 transition-colors"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Action buttons */}
+                  <div className="flex items-center gap-3 pt-4 border-t border-gray-800">
+                    {project.demoUrl && (
+                      <a
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                        Demo
+                      </a>
+                    )}
+                    
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                        Code
+                      </a>
+                    )}
+
+                    {!project.demoUrl && !project.githubUrl && (
+                      <div className="flex items-center text-sm text-gray-600 group-hover:text-gray-400 transition-colors">
+                        <span className="mr-2">View details</span>
+                        <svg
+                          className={`w-4 h-4 transition-transform ${
+                            hoveredIndex === i ? "translate-x-1" : ""
+                          }`}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                          />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
+
+        {/* Note about videos */}
+        <motion.p
+          className="mt-12 text-center text-sm text-gray-600"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+        >
+          Click on projects with video demos to watch them in action
+        </motion.p>
       </div>
     </section>
   );

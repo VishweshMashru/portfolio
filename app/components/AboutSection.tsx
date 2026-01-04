@@ -1,99 +1,137 @@
 "use client";
-import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
-import "react-vertical-timeline-component/style.min.css";
 import { motion } from "framer-motion";
-import { FaGraduationCap, FaProjectDiagram, FaLaptopCode } from "react-icons/fa";
+
+const timeline = [
+  {
+    period: "2019 – 2021",
+    title: "High School",
+    description: "Built foundation in mathematics and computer science through early programming projects in C/C++ and Python.",
+    highlights: ["First programs", "Microcontroller projects", "Robotics"],
+  },
+  {
+    period: "2022 – 2025",
+    title: "San José State University",
+    description: "Focused on systems programming, compiler design, and full-stack development. Explored operating systems and advanced algorithms.",
+    highlights: ["Computer Architecture", "Operating Systems", "Advanced Algorithms"],
+  },
+  {
+    period: "Present",
+    title: "Current Focus",
+    description: "Expanding expertise in software engineering and computational biology, seeking opportunities to apply technical skills to impactful projects.",
+    highlights: ["AI/ML", "Distributed Systems", "Computer Vision"],
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative py-24 px-6 bg-[#0f0f0f] overflow-hidden">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.12]"
-        style={{
-          backgroundImage:
-            "radial-gradient(80% 50% at 50% -10%, rgba(59,130,246,0.25) 0%, transparent 60%), radial-gradient(70% 45% at 10% 110%, rgba(45,212,191,0.18) 0%, transparent 60%)",
-        }}
-      />
-      <div className="relative max-w-6xl mx-auto text-center">
-        <motion.h2
-          className="text-4xl font-bold text-blue-400"
-          initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          About Me
-        </motion.h2>
+    <section id="about" className="relative py-32 px-6 bg-black overflow-hidden">
+      {/* Subtle grid overlay */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, #fff 1px, transparent 1px),
+              linear-gradient(to bottom, #fff 1px, transparent 1px)
+            `,
+            backgroundSize: "60px 60px",
+          }}
+        />
+      </div>
 
-        <VerticalTimeline className="mt-12">
-          {/* High school */}
-          <VerticalTimelineElement
-            contentStyle={{
-              background: "rgba(32,32,32,0.85)",
-              color: "#fff",
-              backdropFilter: "blur(10px)",
-              border: "1px solid rgba(255,255,255,0.06)",
-            }}
-            contentArrowStyle={{ borderRight: "7px solid rgba(32,32,32,0.85)" }}
-            date="2019 – 2021"
-            iconStyle={{ background: "#3B82F6", color: "#fff" }}
-            icon={<FaGraduationCap />}
-          >
-            <h3 className="font-bold">High School</h3>
-            <p>Built a strong base in math and CS; started tinkering with code and robotics.</p>
-            <ul className="mt-3 ml-5 list-disc text-zinc-300 space-y-1">
-              <li>First programs in C/C++ and Python.</li>
-              <li>Basic microcontroller projects and simple bots.</li>
-            </ul>
-          </VerticalTimelineElement>
+      <div className="relative max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
+          {/* Left column - Title */}
+          <div className="lg:sticky lg:top-32">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <h2 className="text-6xl md:text-7xl font-bold text-white mb-8 tracking-tight">
+                About
+              </h2>
+              <div className="w-20 h-1 bg-white mb-8" />
+              <p className="text-lg text-gray-400 leading-relaxed">
+                A journey through systems, algorithms, and the art of building
+                software that matters.
+              </p>
+            </motion.div>
+          </div>
 
-          {/* SJSU */}
-          <VerticalTimelineElement
-            contentStyle={{
-              background: "rgba(32,32,32,0.85)",
-              color: "#fff",
-              backdropFilter: "blur(10px)",
-              border: "1px solid rgba(255,255,255,0.06)",
-            }}
-            contentArrowStyle={{ borderRight: "7px solid rgba(32,32,32,0.85)" }}
-            date="2022 – 2025"
-            iconStyle={{ background: "#06B6D4", color: "#fff" }}
-            icon={<FaLaptopCode />}
+          {/* Right column - Timeline */}
+          <motion.div
+            className="space-y-16"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
           >
-            <h3 className="font-bold">San José State University</h3>
-            <p>Deepened focus on systems, compilers, and full-stack development.</p>
-            <ul className="mt-3 ml-5 list-disc text-zinc-300 space-y-1">
-              <li>Explored operating systems, computer architecture, and advanced algorithms.</li>
-              <li>Built projects that strengthened problem-solving and low-level programming skills.</li>
-            </ul>
-          </VerticalTimelineElement>
+            {timeline.map((item, i) => (
+              <motion.div
+                key={i}
+                variants={itemVariants}
+                className="group relative"
+              >
+                {/* Connecting line */}
+                {i !== timeline.length - 1 && (
+                  <div className="absolute left-0 top-16 bottom-0 w-px bg-gradient-to-b from-gray-700 to-transparent" />
+                )}
 
-          {/* Current */}
-          <VerticalTimelineElement
-            contentStyle={{
-              background: "rgba(32,32,32,0.85)",
-              color: "#fff",
-              backdropFilter: "blur(10px)",
-              border: "1px solid rgba(255,255,255,0.06)",
-            }}
-            contentArrowStyle={{ borderRight: "7px solid rgba(32,32,32,0.85)" }}
-            date="Now"
-            iconStyle={{ background: "#9333EA", color: "#fff" }}
-            icon={<FaProjectDiagram />}
-          >
-            <h3 className="font-bold">Current Focus</h3>
-            <p>
-              Continuing to expand my skills in computer science, exploring
-              challenging problems in software engineering, and seeking
-              opportunities to apply these abilities to impactful projects.
-            </p>
-            <p className="mt-3 text-zinc-300">
-              I’m especially interested in areas that bridge low-level systems
-              with modern application development and enjoy learning whatever new
-              technologies help me grow as an engineer.
-            </p>
-          </VerticalTimelineElement>
-        </VerticalTimeline>
+                <div className="relative pl-12">
+                  {/* Timeline dot */}
+                  <div className="absolute left-0 top-2 w-3 h-3 bg-white rounded-full ring-4 ring-black group-hover:ring-8 transition-all" />
+
+                  <p className="text-sm text-gray-500 uppercase tracking-wider mb-2">
+                    {item.period}
+                  </p>
+                  
+                  <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">
+                    {item.title}
+                  </h3>
+                  
+                  <p className="text-gray-400 leading-relaxed mb-6">
+                    {item.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {item.highlights.map((highlight) => (
+                      <span
+                        key={highlight}
+                        className="px-3 py-1 text-sm border border-gray-700 text-gray-300 rounded-full hover:border-white hover:text-white transition-colors"
+                      >
+                        {highlight}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
