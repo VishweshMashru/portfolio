@@ -7,6 +7,7 @@ const links = [
   { href: "#about", label: "About" },
   { href: "#skills", label: "Skills" },
   { href: "#projects", label: "Projects" },
+  { href: "/blog", label: "Blog" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -19,12 +20,14 @@ export default function Navbar() {
     const onScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      const positions = links.map((l) => {
-        const el = document.querySelector(l.href);
-        if (!el) return { id: l.href, top: Infinity };
-        const rect = (el as HTMLElement).getBoundingClientRect();
-        return { id: l.href, top: Math.abs(rect.top) };
-      });
+      const positions = links
+        .filter((l) => l.href.startsWith('#')) // Only check anchor links
+        .map((l) => {
+          const el = document.querySelector(l.href);
+          if (!el) return { id: l.href, top: Infinity };
+          const rect = (el as HTMLElement).getBoundingClientRect();
+          return { id: l.href, top: Math.abs(rect.top) };
+        });
       positions.sort((a, b) => a.top - b.top);
       if (positions[0]) setActive(positions[0].id);
     };
