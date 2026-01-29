@@ -31,7 +31,7 @@ const projects: Project[] = [
     year: "2024",
     category: "Computer Vision / Medical",
     videoUrl: "https://drive.google.com/file/d/17aJLdqYPWjoA2xwi0vN4jGMfea9m5TCD/view",
-    demoUrl: "",
+    demoUrl: "https://drive.google.com/file/d/17aJLdqYPWjoA2xwi0vN4jGMfea9m5TCD/view",
     githubUrl: "",
   },
   {
@@ -41,7 +41,7 @@ const projects: Project[] = [
     year: "2024",
     category: "Game Development / Physics",
     videoUrl: "https://drive.google.com/file/d/1W2sf3VZPlweyTfPqOoPCPVKgNxvPIJwe/view",
-    demoUrl: "",
+    demoUrl: "https://drive.google.com/file/d/1W2sf3VZPlweyTfPqOoPCPVKgNxvPIJwe/view",
     githubUrl: "",
   },
   {

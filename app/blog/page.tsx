@@ -13,6 +13,22 @@ type BlogPost = {
 
 const blogPosts: BlogPost[] = [
   {
+    title: "Everyone Should Suffer Through Splitting a String in C",
+    excerpt: "I used to think C was useless torture. Then I tried to split a string and realized strings in C aren't strings—they're just memory. That's when I felt like a real programmer for the first time.",
+    date: "Jan 29, 2026",
+    readTime: "6 min read",
+    category: "Programming Languages",
+    slug: "splitting-string-in-c",
+  },
+  {
+    title: "I Use Arch Linux, btw (I Don't Actually Use Arch)",
+    excerpt: "Why I switched from Windows to Fedora Linux for daily programming work. It's not about being cool—it's about Windows being a pain in the ass and Linux treating you like someone who can read and think.",
+    date: "Jan 28, 2026",
+    readTime: "5 min read",
+    category: "Operating Systems",
+    slug: "i-use-arch-linux-btw",
+  },
+  {
     title: "Why C is Still the Best Programming Language to Learn in 2026",
     excerpt: "In an era of JavaScript frameworks and Python AI libraries, learning C remains the most valuable investment for any serious programmer. Here's why mastering pointers and manual memory management makes you a better engineer.",
     date: "Jan 15, 2026",
@@ -37,7 +53,7 @@ const blogPosts: BlogPost[] = [
     slug: "stop-chasing-frameworks-learn-cs",
   },
   {
-    title: "I use Vim BTW",
+    title: "Why I Still Use Vim in 2026",
     excerpt: "VS Code is great. But there's something about modal editing and staying on the keyboard that makes Vim irreplaceable for systems programming and remote development.",
     date: "Oct 10, 2025",
     readTime: "6 min read",
